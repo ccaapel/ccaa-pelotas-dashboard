@@ -1,0 +1,221 @@
+<!doctype html><html lang="pt-BR"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><meta name="robots" content="noindex"><title>Base de alunos CCAA Pelotas</title><style>:root{--color-fg:#1f1e1d;--color-fg-muted:#6b6a68;--color-panel:#faf9f5;--color-border-line:#e3e0d8;--cds-gap-xs:6px;--cds-gap-sm:10px;--cds-gap-md:16px;--cds-gap-xl:40px;--cds-radius:10px;--cds-pad-xs:6px;--cds-pad-sm:10px;--cds-pad-md:14px;--cds-pad-lg:20px;--cds-font-size-caption:12px;--cds-font-size-body:14px;--cds-font-size-heading:17px;--cds-font-size-title:24px;--cds-font-weight-medium:500;--cds-chart-status-critical:#c2410c;--cds-chart-muted:#c9c5ba;--cds-chart-axis:#a8a496;--cds-chart-grid:#e8e5dc;--cds-surface-popover:#fff;--cds-border:#d6d2c6;--cds-shadow-popover:0 4px 14px rgba(0,0,0,.12);--cds-text-secondary:#6b6a68;--font-anthropic-sans:system-ui,-apple-system,"Segoe UI",sans-serif;--font-anthropic-serif:Georgia,"Times New Roman",serif}
+@media(prefers-color-scheme:dark){:root{--color-fg:#ece9e1;--color-fg-muted:#a8a496;--color-panel:#262624;--color-border-line:#3a3936;--cds-chart-muted:#5b5950;--cds-chart-axis:#6b6a68;--cds-chart-grid:#33322f;--cds-surface-popover:#30302e;--cds-border:#4a4945;--cds-chart-status-critical:#f08a5d}}
+body{margin:0;background:#fff;color:var(--color-fg);padding:32px 20px}
+@media(prefers-color-scheme:dark){body{background:#1c1c1a}}
+</style></head><body><style>
+  #dash-root { --dash-gutter: clamp(16px, 4vw, 40px); }
+  .bsa { max-width: 1080px; margin-inline: auto; display: grid; gap: var(--cds-gap-xl); font-family: var(--font-anthropic-sans); color: var(--color-fg); }
+  .bsa * { box-sizing: border-box; }
+  .bsa b { font-weight: 600; font-variant-numeric: tabular-nums; }
+  .bsa-head { display: grid; gap: var(--cds-gap-xs); }
+  .bsa-eyebrow { margin: 0; font-size: var(--cds-font-size-caption); letter-spacing: .08em; text-transform: uppercase; color: var(--color-fg-muted); }
+  .bsa-title { margin: 0; font-family: var(--font-anthropic-serif); font-weight: 400; font-size: clamp(1.75rem, 4vw, 2.5rem); line-height: 1.1; }
+  .bsa-take { margin: 0; font-size: var(--cds-font-size-heading); line-height: 1.45; max-width: 66ch; }
+  .bsa-ref { margin: 0; font-size: var(--cds-font-size-caption); color: var(--color-fg-muted); max-width: 72ch; }
+  .bsa-sec { display: grid; gap: var(--cds-gap-md); }
+  .bsa-sec > h2 { margin: 0; font-size: var(--cds-font-size-title); font-family: var(--font-anthropic-serif); font-weight: 400; }
+  .bsa-lead { margin: 0; font-size: var(--cds-font-size-body); color: var(--color-fg-muted); max-width: 72ch; }
+  .bsa-kpis { display: grid; grid-template-columns: repeat(auto-fit, minmax(min(100%, 10rem), 1fr)); gap: var(--cds-gap-md); }
+  .bsa-kpi { background: var(--color-panel); border: 1px solid var(--color-border-line); border-radius: var(--cds-radius); padding: var(--cds-pad-md) var(--cds-pad-lg); display: grid; gap: var(--cds-gap-xs); align-content: start; }
+  .bsa-kpi span { font-size: var(--cds-font-size-caption); color: var(--color-fg-muted); }
+  .bsa-kpi strong { font-family: var(--font-anthropic-serif); font-weight: 400; font-size: 2rem; line-height: 1; font-variant-numeric: tabular-nums; }
+  .bsa-kpi small { font-size: var(--cds-font-size-caption); color: var(--color-fg-muted); }
+  .bsa-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(min(100%, 22rem), 1fr)); gap: var(--cds-gap-md); }
+  .bsa-card { background: var(--color-panel); border: 1px solid var(--color-border-line); border-radius: var(--cds-radius); padding: var(--cds-pad-lg); display: grid; gap: var(--cds-gap-sm); align-content: start; min-width: 0; }
+  .bsa-card h3 { margin: 0; font-size: var(--cds-font-size-heading); font-weight: var(--cds-font-weight-medium); }
+  .bsa-note { margin: 0; font-size: var(--cds-font-size-caption); color: var(--color-fg-muted); max-width: 70ch; }
+  .bsa-insight { border-left: 3px solid var(--cds-chart-status-critical); }
+  .bsa-insight p { margin: 0; font-size: var(--cds-font-size-body); line-height: 1.5; }
+  .bsa-tag { font-size: var(--cds-font-size-caption); letter-spacing: .06em; text-transform: uppercase; color: var(--color-fg-muted); }
+  .bsa-chart { position: relative; min-height: 13rem; }
+  .bsa-chart svg { display: block; width: 100%; height: auto; overflow: visible; }
+  .bsa-chart text { font-family: var(--font-anthropic-sans); font-size: 12px; fill: var(--color-fg-muted); }
+  .bsa-chart .val { fill: var(--color-fg); font-variant-numeric: tabular-nums; font-weight: 600; }
+  .bsa-chart .loss { fill: var(--color-fg-muted); font-size: 11px; }
+  .bsa-chart .loss.big { fill: var(--cds-chart-status-critical); font-weight: 600; }
+  .bsa-tip { position: absolute; pointer-events: none; z-index: 2; background: var(--cds-surface-popover); border: 1px solid var(--cds-border); border-radius: var(--cds-radius); box-shadow: var(--cds-shadow-popover); padding: var(--cds-pad-xs) var(--cds-pad-sm); font-size: var(--cds-font-size-caption); white-space: nowrap; }
+  .bsa-tip small { display: block; color: var(--cds-text-secondary); }
+  .bsa-box { max-height: 22rem; overflow: auto; border: 1px solid var(--color-border-line); border-radius: var(--cds-radius); }
+  .bsa-box table { width: 100%; border-collapse: collapse; font-size: var(--cds-font-size-body); font-variant-numeric: tabular-nums; }
+  .bsa-box th, .bsa-box td { padding: var(--cds-pad-xs) var(--cds-pad-md); text-align: right; border-bottom: 1px solid var(--color-border-line); white-space: nowrap; }
+  .bsa-box th:first-child, .bsa-box td:first-child { text-align: left; }
+  .bsa-box th { position: sticky; top: 0; background: var(--color-panel); color: var(--color-fg-muted); font-weight: 500; font-size: var(--cds-font-size-caption); }
+  .bsa-cellbar { display: inline-block; height: 8px; border-radius: 2px; background: var(--cds-chart-muted); margin-right: var(--cds-gap-xs); vertical-align: middle; }
+  .bsa details { font-size: var(--cds-font-size-body); color: var(--color-fg-muted); }
+  .bsa summary { cursor: pointer; color: var(--color-fg); }
+  .bsa dl { display: grid; gap: var(--cds-gap-xs); margin: var(--cds-gap-sm) 0 0; }
+  .bsa dt { color: var(--color-fg); font-weight: 600; }
+  .bsa dd { margin: 0 0 var(--cds-gap-xs); max-width: 72ch; }
+</style>
+
+<div class="bsa">
+  <header class="bsa-head">
+    <p class="bsa-eyebrow">CCAA Pelotas</p>
+    <h1 class="bsa-title">Base de alunos e rematrícula 2027</h1>
+    <p class="bsa-take"><b data-draw="num" data-source="kpis" data-field="valor" data-where="id=assinados">—</b> de <b data-draw="num" data-source="kpis" data-field="valor" data-where="id=seguem">—</b> alunos já assinaram 2027 (<b data-draw="num" data-source="kpis" data-field="valor" data-where="id=taxa_assinados">—</b>). Faltam <b data-draw="num" data-source="kpis" data-field="valor" data-where="id=falta_fechar">—</b>, o que dá <b data-draw="num" data-source="kpis" data-field="valor" data-where="id=por_dia">—</b> por dia útil até <b data-draw="prazo">—</b>.</p>
+    <p class="bsa-ref">Conferido com o Sponte em <b data-draw="num" data-source="kpis" data-field="valor" data-where="id=conferido_em">—</b>. Só totais, nenhum dado de aluno.</p>
+  </header>
+
+  <section class="bsa-sec" id="situacao">
+    <h2>Alunos por situação</h2>
+    <div class="bsa-kpis" aria-label="Alunos por situação">
+      <div class="bsa-kpi"><span>Ativos</span><strong data-draw="num" data-source="kpis" data-field="valor" data-where="id=alunos">—</strong></div>
+      <div class="bsa-kpi"><span>Trancados</span><strong data-draw="num" data-source="kpis" data-field="valor" data-where="id=trancados">—</strong></div>
+      <div class="bsa-kpi"><span>Inativos</span><strong data-draw="num" data-source="kpis" data-field="valor" data-where="id=inativos">—</strong></div>
+      <div class="bsa-kpi"><span>Formandos</span><strong data-draw="num" data-source="kpis" data-field="valor" data-where="id=formandos">—</strong><small>livro 11</small></div>
+    </div>
+  </section>
+
+  <section class="bsa-sec" id="rematricula">
+    <h2>Rematrícula 2027</h2>
+    <div class="bsa-kpis" id="placar" aria-label="Placar da rematrícula">
+      <div class="bsa-kpi"><span>Assinaram</span><strong data-draw="num" data-source="kpis" data-field="valor" data-where="id=assinados">—</strong><small>contrato assinado</small></div>
+      <div class="bsa-kpi"><span>Esperando assinatura</span><strong data-draw="num" data-source="kpis" data-field="valor" data-where="id=assinatura_pendente">—</strong><small>já disseram sim</small></div>
+      <div class="bsa-kpi"><span>Faltam fechar</span><strong data-draw="num" data-source="kpis" data-field="valor" data-where="id=falta_fechar">—</strong></div>
+      <div class="bsa-kpi"><span>Por dia útil</span><strong data-draw="num" data-source="kpis" data-field="valor" data-where="id=por_dia">—</strong><small>em <b data-draw="num" data-source="kpis" data-field="valor" data-where="id=dias_uteis">—</b> dias úteis</small></div>
+    </div>
+    <div class="bsa-grid">
+      <article class="bsa-card" id="funil">
+        <h3>Onde a rematrícula para</h3>
+        <div class="bsa-chart" data-draw="chart-funil" data-source="funil"></div>
+      </article>
+      <article class="bsa-card" id="equipe">
+        <h3>Por atendente</h3>
+        <div class="bsa-box">
+          <table data-source="equipe" data-row-key="atendente">
+            <thead><tr><th data-field="atendente">Atendente</th><th data-field="alunos">Alunos</th><th data-field="assinaram">Assinaram</th><th data-field="taxa">% assinado</th></tr></thead>
+            <tbody data-draw="equipe-body"></tbody>
+          </table>
+        </div>
+      </article>
+    </div>
+  </section>
+
+  <section class="bsa-sec" id="recuperacao">
+    <h2>Recuperação de inativos</h2>
+    <article class="bsa-card" id="rec-chart">
+      <h3>Inativos por semestre em que pararam</h3>
+      <p class="bsa-note">Barra clara: total. Barra cheia: já contatados. Só <b data-draw="num" data-source="kpis" data-field="valor" data-where="id=inativos_recentes_contatados">—</b> dos <b data-draw="num" data-source="kpis" data-field="valor" data-where="id=inativos_recentes">—</b> que pararam de 2025 para cá foram procurados.</p>
+      <div class="bsa-chart" data-draw="chart-rec" data-source="recuperacao"></div>
+    </article>
+  </section>
+</div>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/d3/7.9.0/d3.min.js"></script>
+<script>
+const DATA={"cursos": [{"curso": "Baby", "matriculas": 7}, {"curso": "Kids", "matriculas": 53}, {"curso": "Preteen", "matriculas": 28}, {"curso": "English Course", "matriculas": 212}, {"curso": "Teachers", "matriculas": 9}, {"curso": "Español", "matriculas": 15}, {"curso": "VIP", "matriculas": 7}], "equipe": [{"atendente": "Pedro", "alunos": 108, "nao_abordados": 1, "abordados": 57, "assinatura_pendente": 3, "assinaram": 41, "taxa": 0.3796}, {"atendente": "Alice", "alunos": 108, "nao_abordados": 75, "abordados": 0, "assinatura_pendente": 9, "assinaram": 24, "taxa": 0.2222}, {"atendente": "Fran", "alunos": 104, "nao_abordados": 77, "abordados": 0, "assinatura_pendente": 8, "assinaram": 19, "taxa": 0.1827}], "faixas": [{"faixa": "0 a 5", "alunos": 5}, {"faixa": "6 a 9", "alunos": 47}, {"faixa": "10 a 11", "alunos": 43}, {"faixa": "12 a 14", "alunos": 93}, {"faixa": "15 a 17", "alunos": 51}, {"faixa": "18 a 29", "alunos": 61}, {"faixa": "30 a 49", "alunos": 20}, {"faixa": "50 ou mais", "alunos": 10}], "funil": [{"etapa": "Seguem em 2027", "alunos": 320, "ordem": 1}, {"etapa": "Já abordados", "alunos": 167, "ordem": 2}, {"etapa": "Disseram sim (contrato lançado)", "alunos": 104, "ordem": 3}, {"etapa": "Assinaram", "alunos": 84, "ordem": 4}], "kpis": [{"id": "conferido_em", "valor": "07/11/2026"}, {"id": "alunos", "valor": 331}, {"id": "trancados", "valor": 40}, {"id": "inativos", "valor": 727}, {"id": "formandos", "valor": 140}, {"id": "sem_idade", "valor": 1}, {"id": "niveis_menores", "valor": 74}, {"id": "seguem", "valor": 320}, {"id": "formandos_ciclo", "valor": 11}, {"id": "assinados", "valor": 84}, {"id": "taxa_assinados", "valor": "26%"}, {"id": "assinatura_pendente", "valor": 20}, {"id": "pend_dos_sim", "valor": "19%"}, {"id": "nao_abordados", "valor": 153}, {"id": "abordados_sem_sim", "valor": 57}, {"id": "possivel_cancelamento", "valor": 6}, {"id": "falta_fechar", "valor": 230}, {"id": "definir_turma", "valor": 26}, {"id": "dias_uteis", "valor": 15}, {"id": "por_dia", "valor": 15.3}, {"id": "inativos_nao_contatados", "valor": 700}, {"id": "taxa_nao_contatados", "valor": "96%"}, {"id": "inativos_recentes", "valor": 240}, {"id": "inativos_recentes_contatados", "valor": 21}, {"id": "vencem_novembro", "valor": 56}], "niveis": [{"nivel": "A2.2", "alunos": 13}, {"nivel": "10.2", "alunos": 11}, {"nivel": "4.1", "alunos": 10}, {"nivel": "8.3", "alunos": 10}, {"nivel": "A1.1", "alunos": 10}, {"nivel": "Kids 2.1", "alunos": 10}, {"nivel": "A2.1", "alunos": 9}, {"nivel": "Kids 6.1", "alunos": 9}, {"nivel": "Kids 8.3", "alunos": 9}, {"nivel": "T1.1", "alunos": 9}, {"nivel": "6.2", "alunos": 8}, {"nivel": "Preteen 2.1", "alunos": 8}, {"nivel": "T2.2", "alunos": 8}, {"nivel": "T2.4", "alunos": 8}, {"nivel": "Teachers 1.1", "alunos": 8}, {"nivel": "4.6", "alunos": 7}, {"nivel": "6.1", "alunos": 7}, {"nivel": "Kids 6.2", "alunos": 7}, {"nivel": "Preteen 2.4", "alunos": 7}, {"nivel": "VIP", "alunos": 7}, {"nivel": "11.1", "alunos": 6}, {"nivel": "6.3", "alunos": 6}, {"nivel": "8.1", "alunos": 6}, {"nivel": "8.4", "alunos": 6}, {"nivel": "A1.2", "alunos": 6}, {"nivel": "Español 1.1", "alunos": 6}, {"nivel": "T2.5", "alunos": 6}, {"nivel": "4.4", "alunos": 5}], "recuperacao": [{"parou": "2026-2", "alunos": 15, "contatados": 0, "interesse": 0}, {"parou": "2026-1", "alunos": 36, "contatados": 0, "interesse": 0}, {"parou": "2025-2", "alunos": 98, "contatados": 4, "interesse": 2}, {"parou": "2025-1", "alunos": 91, "contatados": 17, "interesse": 3}, {"parou": "2024-2", "alunos": 106, "contatados": 1, "interesse": 0}, {"parou": "2024-1", "alunos": 48, "contatados": 1, "interesse": 0}, {"parou": "2023-2", "alunos": 113, "contatados": 3, "interesse": 0}, {"parou": "2023-1", "alunos": 82, "contatados": 1, "interesse": 1}, {"parou": "2022-2", "alunos": 66, "contatados": 0, "interesse": 0}, {"parou": "2022-1", "alunos": 72, "contatados": 0, "interesse": 0}], "ritmo": [{"temporada": "2021/22", "mes": "out", "rematriculas": 0}, {"temporada": "2021/22", "mes": "nov", "rematriculas": 96}, {"temporada": "2021/22", "mes": "dez", "rematriculas": 196}, {"temporada": "2021/22", "mes": "jan", "rematriculas": 6}, {"temporada": "2021/22", "mes": "fev", "rematriculas": 11}, {"temporada": "2022/23", "mes": "out", "rematriculas": 1}, {"temporada": "2022/23", "mes": "nov", "rematriculas": 133}, {"temporada": "2022/23", "mes": "dez", "rematriculas": 156}, {"temporada": "2022/23", "mes": "jan", "rematriculas": 9}, {"temporada": "2022/23", "mes": "fev", "rematriculas": 18}, {"temporada": "2023/24", "mes": "out", "rematriculas": 0}, {"temporada": "2023/24", "mes": "nov", "rematriculas": 110}, {"temporada": "2023/24", "mes": "dez", "rematriculas": 174}, {"temporada": "2023/24", "mes": "jan", "rematriculas": 15}, {"temporada": "2023/24", "mes": "fev", "rematriculas": 25}, {"temporada": "2024/25", "mes": "out", "rematriculas": 1}, {"temporada": "2024/25", "mes": "nov", "rematriculas": 126}, {"temporada": "2024/25", "mes": "dez", "rematriculas": 114}, {"temporada": "2024/25", "mes": "jan", "rematriculas": 34}, {"temporada": "2024/25", "mes": "fev", "rematriculas": 28}, {"temporada": "2025/26", "mes": "out", "rematriculas": 41}, {"temporada": "2025/26", "mes": "nov", "rematriculas": 132}, {"temporada": "2025/26", "mes": "dez", "rematriculas": 42}, {"temporada": "2025/26", "mes": "jan", "rematriculas": 4}, {"temporada": "2025/26", "mes": "fev", "rematriculas": 13}, {"temporada": "2026/27", "mes": "out", "rematriculas": 93}], "vencimentos": [{"semana": "09 a 15/11", "contratos": 13, "mes": 11}, {"semana": "16 a 22/11", "contratos": 20, "mes": 11}, {"semana": "23 a 30/11", "contratos": 23, "mes": 11}, {"semana": "01 a 06/12", "contratos": 8, "mes": 12}, {"semana": "07 a 13/12", "contratos": 10, "mes": 12}, {"semana": "14 a 20/12", "contratos": 7, "mes": 12}, {"semana": "21 a 31/12", "contratos": 2, "mes": 12}]};
+const dash=(()=>{const fns={};return{colors:['#d97757'],
+data:(id)=>DATA[id]?{status:'ok',data:DATA[id]}:{status:'missing'},
+draw:(n,f)=>{fns[n]=f},
+run:()=>{for(const n in fns)document.querySelectorAll('[data-draw="'+n+'"]').forEach(fns[n])}}})();
+</script>
+<script>
+  d3.formatDefaultLocale({ decimal: ',', thousands: '.', grouping: [3], currency: ['R$ ', ''] });
+  const PRAZO = '30/11';
+  const nf = d3.format(',');
+  const pf = d3.format('.0%');
+  const rowsOf = (id) => { const g = dash.data(id); return g.status === 'ok' ? g.data : null; };
+
+  dash.draw('prazo', (el) => { el.textContent = PRAZO; });
+
+  dash.draw('num', (el) => {
+    el.textContent = '—';
+    const rows = rowsOf(el.dataset.source);
+    if (!rows) return;
+    const where = [...new URLSearchParams(el.dataset.where || '')];
+    const hit = rows.find((r) => where.every(([k, v]) => String(r[k]) === v));
+    if (!hit) return;
+    const v = hit[el.dataset.field];
+    el.textContent = typeof v === 'number' ? (Number.isInteger(v) ? nf(v) : d3.format(',.1f')(v)) : String(v);
+  });
+
+  function tooltip(el) {
+    const tip = d3.select(el).append('div').attr('class', 'bsa-tip').style('display', 'none');
+    return {
+      show(event, title, line) {
+        const box = el.getBoundingClientRect();
+        tip.style('display', 'block').html('');
+        tip.append('span').text(title);
+        tip.append('small').text(line);
+        const x = Math.min(Math.max(event.clientX - box.left + 12, 0), Math.max(box.width - 170, 0));
+        tip.style('left', x + 'px').style('top', Math.max(event.clientY - box.top - 44, 0) + 'px');
+      },
+      hide() { tip.style('display', 'none'); },
+    };
+  }
+
+  dash.draw('chart-funil', (el) => {
+    d3.select(el).selectAll('*').remove();
+    const rows = rowsOf('funil');
+    if (!rows) return;
+    const data = rows.slice().sort((a, b) => a.ordem - b.ordem);
+    const losses = data.slice(1).map((d, i) => data[i].alunos - d.alunos);
+    const maxLoss = d3.max(losses);
+    const w = Math.max(280, el.clientWidth), rowH = 62, top = 4;
+    const h = top + rowH * data.length;
+    const svg = d3.select(el).append('svg').attr('viewBox', `0 0 ${w} ${h}`).attr('role', 'img').attr('aria-label', 'Funil da rematrícula 2027');
+    const x = d3.scaleLinear([0, data[0].alunos], [0, w - 56]);
+    const tip = tooltip(el);
+    data.forEach((d, i) => {
+      const y = top + i * rowH;
+      svg.append('text').attr('x', 0).attr('y', y + 11).text(d.etapa);
+      svg.append('rect').attr('x', 0).attr('y', y + 17).attr('width', Math.max(2, x(d.alunos))).attr('height', 18).attr('rx', 3)
+        .attr('fill', i === data.length - 1 ? dash.colors[0] : 'var(--cds-chart-muted)')
+        .on('mousemove', (event) => tip.show(event, d.etapa, `${nf(d.alunos)} alunos, ${pf(d.alunos / data[0].alunos)} da base`))
+        .on('mouseleave', tip.hide);
+      svg.append('text').attr('class', 'val').attr('x', x(d.alunos) + 8).attr('y', y + 30).text(nf(d.alunos));
+      if (i > 0) {
+        const loss = losses[i - 1];
+        svg.append('text').attr('class', 'loss' + (loss === maxLoss ? ' big' : '')).attr('x', 0).attr('y', y + 52)
+          .text(`perdeu ${nf(loss)} desde a etapa anterior (${pf(loss / data[i - 1].alunos)})`);
+      }
+    });
+  });
+
+  dash.draw('equipe-body', (tb) => {
+    tb.replaceChildren();
+    const rows = rowsOf('equipe');
+    if (!rows) return;
+    rows.forEach((r) => {
+      const tr = document.createElement('tr');
+      const cells = [r.atendente, nf(r.alunos), nf(r.assinaram)];
+      cells.forEach((c) => { const td = document.createElement('td'); td.textContent = c; tr.append(td); });
+      const td = document.createElement('td');
+      const bar = document.createElement('span'); bar.className = 'bsa-cellbar'; bar.style.width = Math.round(r.taxa * 60) + 'px';
+      td.append(bar, document.createTextNode(pf(r.taxa)));
+      tr.append(td);
+      tb.append(tr);
+    });
+  });
+
+  function vbars(el, rows, key, val, label, aria, fmtTip) {
+    d3.select(el).selectAll('*').remove();
+    const w = Math.max(280, el.clientWidth), h = 230, m = { t: 22, r: 4, b: 28, l: 4 };
+    const svg = d3.select(el).append('svg').attr('viewBox', `0 0 ${w} ${h}`).attr('role', 'img').attr('aria-label', aria);
+    const x = d3.scaleBand(rows.map((d) => d[key]), [m.l, w - m.r]).padding(0.22);
+    const y = d3.scaleLinear([0, d3.max(rows, (d) => d[val]) || 1], [h - m.b, m.t]);
+    const tip = tooltip(el);
+    svg.append('line').attr('x1', m.l).attr('x2', w - m.r).attr('y1', h - m.b).attr('y2', h - m.b).attr('stroke', 'var(--cds-chart-axis)');
+    svg.selectAll('rect.bar').data(rows).join('rect').attr('x', (d) => x(d[key])).attr('y', (d) => y(d[val])).attr('width', x.bandwidth()).attr('height', (d) => h - m.b - y(d[val])).attr('rx', 3)
+      .attr('fill', 'var(--cds-chart-muted)')
+      .on('mousemove', (event, d) => tip.show(event, d[key], fmtTip(d)))
+      .on('mouseleave', tip.hide);
+    svg.selectAll('text.val').data(rows).join('text').attr('class', 'val').attr('x', (d) => x(d[key]) + x.bandwidth() / 2).attr('y', (d) => y(d[val]) - 6).attr('text-anchor', 'middle').text((d) => nf(d[val]));
+    svg.selectAll('text.lab').data(rows).join('text').attr('x', (d) => x(d[key]) + x.bandwidth() / 2).attr('y', h - 10).attr('text-anchor', 'middle').attr('font-size', w < 420 ? 9 : 12).text((d) => label(d));
+    return { svg, x, y, h, m };
+  }
+
+  dash.draw('chart-rec', (el) => {
+    d3.select(el).selectAll('*').remove();
+    const rows = rowsOf('recuperacao');
+    if (!rows) return;
+    const data = rows.slice().sort((a, b) => a.parou.localeCompare(b.parou));
+    const r = vbars(el, data, 'parou', 'alunos', (d) => d.parou, 'Inativos por semestre em que pararam',
+      (d) => `${nf(d.alunos)} inativos, ${nf(d.contatados)} contatados, ${nf(d.interesse)} com interesse`);
+    r.svg.selectAll('rect.cont').data(data).join('rect').attr('x', (d) => r.x(d.parou)).attr('y', (d) => r.y(d.contatados))
+      .attr('width', r.x.bandwidth()).attr('height', (d) => r.h - r.m.b - r.y(d.contatados)).attr('rx', 3).attr('fill', dash.colors[0]).attr('pointer-events', 'none');
+  });
+
+  dash.run(); let t; addEventListener('resize',()=>{clearTimeout(t);t=setTimeout(dash.run,150)});
+</script>
+</body></html>
