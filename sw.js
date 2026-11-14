@@ -1,5 +1,5 @@
 // Dashboard CCAA: abre sem internet com a última versão baixada. A página vem sempre da rede quando há conexão.
-const CACHE = 'ccaa-4c26721a77';
+const CACHE = 'ccaa-07344e9d12';
 const BASE = ['./', './index.html', './ccaa-logo.png', './icone-192.png', './manifest.webmanifest'];
 self.addEventListener('install', (e) => { e.waitUntil(caches.open(CACHE).then((c) => c.addAll(BASE)).then(() => self.skipWaiting())); });
 self.addEventListener('activate', (e) => { e.waitUntil(caches.keys().then((ks) => Promise.all(ks.filter((k) => k !== CACHE).map((k) => caches.delete(k)))).then(() => self.clients.claim())); });
